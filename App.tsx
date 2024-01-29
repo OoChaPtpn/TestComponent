@@ -19,9 +19,8 @@ export class App extends Component {
           {/* <MyComponent /> */}
           {/* <TestCameraMask /> */}
           {/* <TestMoti /> */}
-          {/* <MyStackNavigator /> */}
-          <Async_LocalStorage/>
-          {/* <MyComponent2 /> */}
+          <MyStackNavigator />
+          {/* <Async_LocalStorage/> */}
 
         </PaperProvider>
       </NavigationContainer>

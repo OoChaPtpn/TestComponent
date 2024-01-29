@@ -2,25 +2,12 @@ import * as React from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Alert } from 'react-native';
 import { TextInput, Icon, MD3Colors, Button } from 'react-native-paper';
 
-
-
-
-
 const MyComponent = ({ route, navigation }) => {
-
-
     const str_scan = route.params?.str_scanner;
-
-
-
-
     const [text, setText] = React.useState("");
     const showFullName = () => {
         Alert.alert(`Hello ${text}`);
     };
-
-
-
     return (
         <SafeAreaView >
             <View >
