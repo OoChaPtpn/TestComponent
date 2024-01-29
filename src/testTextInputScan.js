@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import uuid from 'react-native-uuid';
-// import { getUniqueId, syncUniqueId, getDeviceName, getDeviceToken, getCarrier} from 'react-native-device-info';
-import DeviceInfo from 'react-native-device-info'
+import { getUniqueId, getDeviceName } from 'react-native-device-info';
+import DeviceInfo, { getUniqueId } from 'react-native-device-info'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MyComponent2 = ({ route, navigation }) => {
@@ -11,32 +11,27 @@ const MyComponent2 = ({ route, navigation }) => {
     console.log(uuid.v4())// ⇨ '11edc52b-2918-4d71-9058-f7285e29d894')
 
     const [deviceID, setDeviceID] = useState('uuid v')
-    let uniqueId = {};
+
     const getdeviceID = async () => {
-        uniqueId.getUniqueId = await DeviceInfo.getUniqueId();
-        uniqueId.syncUniqueId = await DeviceInfo.syncUniqueId();
+        uniDeviceName = await DeviceInfo.getDeviceName();
+        console.log("uniDeviceName : " + JSON.stringify(uniDeviceName));
 
-        uniqueId.getDeviceName = await DeviceInfo.getDeviceName();
-        console.log("uniqueId : " + JSON.stringify(uniqueId));
-
-        uniqueId.getInstanceId = await DeviceInfo.getInstanceId();
-        console.log("getInstanceId(): ", uniqueId.getInstanceId);
-
-        setDeviceID(uniqueId.getInstanceId);
-        //setDataLocal
-        // AsyncStorage.setItem('getdeviceID', getdeviceID);
+        getUniInsId = await DeviceInfo.getInstanceId();
+        console.log("getdeviceID: ", getUniInsId);
+        setDeviceID(getUniInsId);
     }
 
-    console.log("deviceID: ", deviceID)
-    const setDataLocal = () => {
-        AsyncStorage.setItem('getdeviceID', getdeviceID);
-        console.log('getdeviceID_setDataLocal: ', getdeviceID)
-    }
-    const showDataLocal = async () => {
-        let user = await AsyncStorage.getItem('getdeviceID');
-        console.log(user)
+    const setDataLocal = async () => {
+        setUniInsId = await AsyncStorage.setItem("set_UniInsId", deviceID);
+        console.log('setDataLocal: ', setUniInsId)
     }
 
+    const clearDataLocal = async () => {
+        const clearUniInsId = await AsyncStorage.removeItem("set_UniInsId");
+        setName(clearUniInsId);
+        console.log("clearDataLocal: %s , deviceID: %s", clearUniInsId, deviceID);
+
+    }
 
     React.useEffect(() => {
         if (route.params?.post) {
@@ -44,13 +39,21 @@ const MyComponent2 = ({ route, navigation }) => {
             // For example, send the post to the server
             console.log("route.params?.post = ", route.params?.post)
         }
-        console.log("route.params", route.params?.post)
+        console.log("route.params", route.params?.post);
+
+        // return function cleanup() {
+        //     // ทำการ cleanup ที่นี่
+        //     setDeviceID(null);
+        //     console.log("clear count เป็น 0 : ", deviceID);
+        // };
+
     }, [route.params?.post]);
 
     return (
         <SafeAreaView >
             <View >
-                {setDataLocal}
+                {getdeviceID}
+                {/* {setDataLocal} */}
                 <TextInput
                     label="Email"
                     onChangeText={route.params?.post}

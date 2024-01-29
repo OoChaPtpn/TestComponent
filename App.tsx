@@ -8,7 +8,7 @@ import TestCameraMask from './src/TestCameraMask';
 import { NavigationContainer } from '@react-navigation/native';
 import MyStackNavigator from './src/StackNavigator';
 import Async_LocalStorage from './src/StorageLocal';
-
+import MyComponent2 from './src/testTextInputScan';
 
 export class App extends Component {
   render() {
@@ -21,12 +21,13 @@ export class App extends Component {
           {/* <TestMoti /> */}
           {/* <MyStackNavigator /> */}
           <Async_LocalStorage/>
+          {/* <MyComponent2 /> */}
 
         </PaperProvider>
       </NavigationContainer>
 
     )
   }
-}
+};
 
 export default App
